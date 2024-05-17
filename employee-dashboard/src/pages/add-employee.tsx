@@ -49,7 +49,7 @@ export default function AddEmployee() {
 
   return (
     <Box p={8}>
-      <VStack spacing={4} align="start">
+      <VStack spacing={4} align="start" width="full">
         <Heading size="lg">Adicionar Funcionário</Heading>
         <FormControl isRequired>
           <FormLabel>Nome</FormLabel>

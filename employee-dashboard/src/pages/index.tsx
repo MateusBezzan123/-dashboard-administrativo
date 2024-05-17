@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Box, Button, Table, Thead, Tbody, Tr, Th, Td, useToast, Spinner, Center, Heading, VStack, HStack } from "@chakra-ui/react";
+import { Box, Button, Table, Thead, Tbody, Tr, Th, Td, useToast, Spinner, Center, Heading, VStack, HStack, IconButton } from "@chakra-ui/react";
+import { AddIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
 
 interface Employee {
@@ -55,12 +56,14 @@ export default function Home() {
 
   return (
     <Box p={8}>
-      <VStack spacing={4} align="start">
-        <HStack justify="space-between" width="100%">
+      <VStack spacing={4} align="start" width="full">
+        <HStack justify="space-between" width="full">
           <Heading size="lg">Dashboard de Funcionários</Heading>
-          <Button colorScheme="teal" onClick={() => router.push('/add-employee')}>Adicionar Funcionário</Button>
+          <Button colorScheme="teal" leftIcon={<AddIcon />} onClick={() => router.push('/add-employee')}>
+            Adicionar Funcionário
+          </Button>
         </HStack>
-        <Table variant="striped" colorScheme="teal">
+        <Table variant="simple" colorScheme="teal" width="full">
           <Thead>
             <Tr>
               <Th>Nome</Th>
@@ -76,8 +79,20 @@ export default function Home() {
                 <Td>{employee.position}</Td>
                 <Td>{employee.department}</Td>
                 <Td>
-                  <Button colorScheme="yellow" mr={2} onClick={() => router.push(`/edit-employee/${employee._id}`)}>Editar</Button>
-                  <Button colorScheme="red" onClick={() => deleteEmployee(employee._id)}>Deletar</Button>
+                  <HStack spacing={2}>
+                    <IconButton
+                      colorScheme="yellow"
+                      aria-label="Editar funcionário"
+                      icon={<EditIcon />}
+                      onClick={() => router.push(`/edit-employee/${employee._id}`)}
+                    />
+                    <IconButton
+                      colorScheme="red"
+                      aria-label="Deletar funcionário"
+                      icon={<DeleteIcon />}
+                      onClick={() => deleteEmployee(employee._id)}
+                    />
+                  </HStack>
                 </Td>
               </Tr>
             ))}
